@@ -526,7 +526,12 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     
-                    const LoginSubmitButton(),
+                    ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminDashboard()));
+                },
+                child: const Text("Ingresar"),
+              ),
                   ],
                 ),
               ),
@@ -646,6 +651,54 @@ class BackgroundPattern extends StatelessWidget {
         itemBuilder: (context, index) {
           return const Icon(Icons.shield_outlined, size: 28, color: Color(0xFF274C77));
         },
+      ),
+    );
+  }
+}
+
+// --- PANEL DE ADMINISTRADOR ----
+class AdminDashboard extends StatelessWidget {
+  const AdminDashboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFE7ECEF),
+      body: Row(
+        children: [
+          Container(
+            width: 250,
+            color: Colors.white,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("MENU", style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w900)),
+                const Text("Gestion clinica", style: TextStyle(fontSize: 18, color: Color(0xFF274C77), fontWeight: FontWeight.bold)),
+                const SizedBox(height: 20),
+                ListTile(title: const Text("Administracion"), leading: const Icon(Icons.admin_panel_settings)),
+                ListTile(title: const Text("Citas"), leading: const Icon(Icons.calendar_today)),
+              ],
+            ),
+          ),
+          // Área de contenido
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(30),
+              children: [
+                const Text("Panel de control clinico", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Color(0xFF274C77))),
+                const SizedBox(height: 30),
+                // Aquí irían tus stat-cards y la tabla que diseñaste en HTML
+                const Text("Cronograma de citas", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                  child: const ListTile(title: Text("2026-08-05 17:00:00"), subtitle: Text("Limpieza general profesional")),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
